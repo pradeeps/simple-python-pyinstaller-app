@@ -8,7 +8,9 @@ pipeline {
                     }             
                     }             
                     steps {                 
-                        sh 'python -m py_compile sources/add2vals.py sources/calc.py'
+                        sh '''
+                            python --version
+                            python -m py_compile sources/add2vals.py sources/calc.py'''
                                      }         
                         } 
          stage('Test') {
@@ -29,7 +31,7 @@ pipeline {
         stage('Deliver') {
             agent {
                 docker {
-                    image 'cdrx/pyinstaller-linux:python3'
+                    image 'cdrx/pyinstaller-linux:python2'
                 }
             }
             steps {
